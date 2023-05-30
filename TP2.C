@@ -138,3 +138,32 @@ void modificar_venta(VentaCliente* ventas, int contador) {
     printf("Venta modificada exitosamente.\n");
     menu(ventas, &contador);
 }
+
+void eliminar_venta(VentaCliente* ventas, int* contador) {
+    if (contador == 0) {
+        printf("No hay ventas cargadas.\n");
+        menu(ventas, contador);
+        return;
+    }
+
+    int indice;
+    printf("Ingrese el número de venta a eliminar (1-%d): ",contador);
+    scanf("%d", &indice);
+
+    if (indice < 1 || indice > contador) {
+        printf("Número de venta inválido.\n");
+        eliminar_venta(ventas, contador);
+        return;
+    }
+
+    for (int i = indice - 1; i <contador - 1; i++) {
+        ventas[i] = ventas[i + 1];
+    }
+
+    (*contador)--;
+
+    printf("Venta eliminada exitosamente.\n");
+    menu(ventas, contador);
+
+    return;
+}
