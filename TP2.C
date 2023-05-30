@@ -83,3 +83,58 @@ void cargar_venta(VentaCliente* ventas, int* contador) {
     printf("Venta cargada exitosamente.\n");
     menu(ventas, contador);
 }
+
+void mostrar_ventas(VentaCliente* ventas, int contador) {
+    if (contador == 0) {
+        printf("No hay ventas cargadas.\n");
+        menu(ventas, &contador);
+        return;
+    }
+
+    printf("Ventas:\n");
+    printf("%-20s %-20s %-20s %-10s %-30s %-20s\n", "Producto", "Marca", "Tipo", "Talle", "Datos del cliente", "Modo de pago");
+    for (int i = 0; i < contador; i++) {
+        VentaCliente venta = ventas[i];
+        printf("%-20s %-20s %-20s %-10.2f %-30s %-20s\n",
+               venta.producto, venta.marca, venta.tipo, venta.talle, venta.datos_del_cliente, venta.modo_de_pago);
+    }
+
+    menu(ventas, &contador);
+}
+
+void modificar_venta(VentaCliente* ventas, int contador) {
+    if (contador == 0) {
+        printf("No hay ventas cargadas.\n");
+        menu(ventas, &contador);
+        return;
+    }
+
+    int indice;
+    printf("Ingrese el número de venta a modificar (1-%d): ", contador);
+    scanf("%d", &indice);
+
+    if (indice < 1 || indice > contador) {
+        printf("Número de venta inválido.\n");
+        modificar_venta(ventas, contador);
+        return;
+    }
+
+    VentaCliente* venta = &ventas[indice - 1];
+
+    printf("Modificando venta %d:\n", indice);
+    printf("Producto (%s): ", venta->producto);
+    scanf("%s", venta->producto);
+    printf("Marca (%s): ", venta->marca);
+    scanf("%s", venta->marca);
+    printf("Tipo (%s): ", venta->tipo);
+    scanf("%s", venta->tipo);
+    printf("Talle (%.2f): ", venta->talle);
+    scanf("%f", &venta->talle);
+    printf("Datos del cliente (%s): ", venta->datos_del_cliente);
+    scanf(" %[^\n]", venta->datos_del_cliente);
+    printf("Modo de pago (%s): ", venta->modo_de_pago);
+    scanf(" %[^\n]", venta->modo_de_pago);
+
+    printf("Venta modificada exitosamente.\n");
+    menu(ventas, &contador);
+}
