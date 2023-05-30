@@ -147,16 +147,16 @@ void eliminar_venta(VentaCliente* ventas, int* contador) {
     }
 
     int indice;
-    printf("Ingrese el número de venta a eliminar (1-%d): ",contador);
+    printf("Ingrese el número de venta a eliminar (1-%d): ", *contador);
     scanf("%d", &indice);
 
     if (indice < 1 || indice > contador) {
         printf("Número de venta inválido.\n");
-        eliminar_venta(ventas, contador);
+        eliminar_venta(ventas, *contador);
         return;
     }
 
-    for (int i = indice - 1; i <contador - 1; i++) {
+    for (int i = indice - 1; i < *contador - 1; i++) {
         ventas[i] = ventas[i + 1];
     }
 
