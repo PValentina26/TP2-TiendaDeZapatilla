@@ -150,9 +150,9 @@ void eliminar_venta(VentaCliente* ventas, int* contador) {
     printf("Ingrese el número de venta a eliminar (1-%d): ", *contador);
     scanf("%d", &indice);
 
-    if (indice < 1 || indice > contador) {
+    if (indice < 1 || indice > *contador) {
         printf("Número de venta inválido.\n");
-        eliminar_venta(ventas, *contador);
+        eliminar_venta(ventas, contador);
         return;
     }
 
